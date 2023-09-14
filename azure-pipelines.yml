@@ -6,18 +6,22 @@
 trigger:
 - master
 
-pool:
-  name: Default
-
-steps:
-
-- task: Maven@4
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+stages:
+- stage: Build
+  displayName: Build and publish Java application
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      name : Default
+    steps:
+    - task: Maven@4
+      inputs:
+       mavenPomFile: 'pom.xml'
+       publishJUnitResults: true
+       testResultsFiles: '**/surefire-reports/TEST-*.xml'
+       javaHomeOption: 'JDKVersion'
+       mavenVersionOption: 'Default'
+       mavenAuthenticateFeed: false
+       effectivePomSkip: false
+       sonarQubeRunAnalysis: false
