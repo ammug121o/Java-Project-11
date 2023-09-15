@@ -29,7 +29,7 @@ stages:
            
             - task: DownloadBuildArtifacts@1
               inputs:
-               buildType: 'current'
+               buildType: 'specific'
                downloadType: 'single'
                artifactName: 'drop'
                itemPattern: '**/*.war'
