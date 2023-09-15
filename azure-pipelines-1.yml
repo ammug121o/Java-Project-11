@@ -8,20 +8,23 @@ trigger:
 pool:
  name: Default
 
-jobs:
-- deployment: VMDeploy
-  displayName: Web deploy
-  environment:
-    name: VM-JAVA
-    resourceType: VirtualMachine
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - task: CmdLine@2
-          inputs:
-            script: |
-             mkdir sumathi
-      
-             cd sumathi
-
+stages:
+  - stage: Deploy
+    displayName: 'Deploy Web App'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+    - deployment: DeploymentJob
+      pool:
+       vmImage: $(vmImageName)
+      environment: java-container
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - task: PublishPipelineArtifact@1
+              inputs:
+               targetPath: '$(Pipeline.Workspace)'
+               artifact: 'drop'
+               publishLocation: 'pipeline'
+            
