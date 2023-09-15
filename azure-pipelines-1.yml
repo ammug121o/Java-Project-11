@@ -33,4 +33,11 @@ stages:
                artifactName: 'drop'
                itemPattern: '**/*.war'
                downloadPath: '$(System.ArtifactsDirectory)'
+            - task: CopyFilesOverSSH@0
+              inputs:
+                sshEndpoint: 'ssh-cd-dev'
+                sourceFolder: '''$(System.ArtifactsDirectory)'''
+                contents: '**/*.war'
+                targetFolder: '/opt/tomcat/webapps'
+                readyTimeout: '20000'
             
