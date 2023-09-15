@@ -20,16 +20,15 @@ stages:
         runOnce:
           deploy:
             steps:
-        
-              - task: DownloadBuildArtifacts@1
+            
+              - task: DownloadPipelineArtifact@2
                 inputs:
                   buildType: 'specific'
-                  downloadType: 'single'
-                  artifactName: 'drop'
-#               itemPattern: '**/*.war'
+                  project: '4778fa29-d1ca-4971-aaf1-5416a8a4d305'
+                  definition: '5'
                   buildVersionToDownload: 'latest'
-                  specificBuildWithTriggering: true
-                  downloadPath: '$(System.ArtifactsDirectory)'
-
+                  artifactName: 'drop'
+                  itemPattern: '**/*.war'
+                  targetPath: '$(Pipeline.Workspace)'
 
 
