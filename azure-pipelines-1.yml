@@ -18,5 +18,10 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - script: echo my first deployment
+        - task: CmdLine@2
+          inputs:
+            script: |
+             mkdir sumathi
+      
+             cd sumathi
 
