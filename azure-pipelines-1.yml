@@ -21,23 +21,18 @@ stages:
           deploy:
             steps:
         
-            - task: PublishPipelineArtifact@1
-              inputs:
-               targetPath: '$(Pipeline.Workspace)'
-               artifact: 'drop'
-               publishLocation: 'pipeline'
-              
-            - task: DownloadPipelineArtifact@2
-              inputs:
-               buildType: 'current'
-               artifactName: 'drop'
-               itemPattern: '**/*.war'
-               targetPath: '$(Pipeline.Workspace)'
-            - task: CopyFilesOverSSH@0
-              inputs:
-                sshEndpoint: 'ssh-cd-dev'
-                sourceFolder: '$(System.ArtifactsDirectory)'
-                contents: '**/*.war'
-                targetFolder: '/opt/tomcat/webapps'
-                readyTimeout: '20000'
+              - task: DownloadPipelineArtifact@2
+                inputs:
+                  buildType: 'specific'
+                  project: '4778fa29-d1ca-4971-aaf1-5416a8a4d305'
+                  definition: '5'
+                  buildVersionToDownload: 'latest'
+                  targetPath: '$(Pipeline.Workspace)'
+              - task: CopyFilesOverSSH@0
+                inputs:
+                 sshEndpoint: 'ssh-cd-dev'
+                 sourceFolder: '$(System.ArtifactsDirectory)'
+                 contents: '**/*.war'
+                 targetFolder: '/opt/tomcat/webapps'
+                 readyTimeout: '20000'
             
