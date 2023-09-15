@@ -26,16 +26,13 @@ stages:
                targetPath: '$(Pipeline.Workspace)'
                artifact: 'drop'
                publishLocation: 'pipeline'
-           
-            - task: DownloadBuildArtifacts@1
+              
+            - task: DownloadPipelineArtifact@2
               inputs:
-               buildType: 'specific'
-               downloadType: 'single'
+               buildType: 'current'
                artifactName: 'drop'
-#               itemPattern: '**/*.war'
-               buildVersionToDownload: 'latest'
-               specificBuildWithTriggering: true
-               downloadPath: '$(System.ArtifactsDirectory)'
+               itemPattern: '**/*.war'
+               targetPath: '$(Pipeline.Workspace)'
             - task: CopyFilesOverSSH@0
               inputs:
                 sshEndpoint: 'ssh-cd-dev'
