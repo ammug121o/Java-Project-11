@@ -15,7 +15,7 @@ stages:
 #    condition: succeeded()
     jobs:
     - deployment: DeploymentJob
-      environment: VM-JAVA
+      environment: java-container
       strategy:
         runOnce:
           deploy:
