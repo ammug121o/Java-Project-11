@@ -33,6 +33,6 @@ stages:
                  sshEndpoint: 'ssh-cd-dev'
                  sourceFolder: '$(Pipeline.Workspace)/drop/webapp/target'
                  contents: 'webapp.war'
-                 targetFolder: '/opt'
+                 targetFolder: '/opt/tomcat/webapps'
                  readyTimeout: '20000'
             
