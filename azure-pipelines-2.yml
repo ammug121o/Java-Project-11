@@ -21,11 +21,15 @@ stages:
           deploy:
             steps:
         
-            - task: PublishPipelineArtifact@1
-              inputs:
-               targetPath: '$(Pipeline.Workspace)'
-               artifact: 'drop'
-               publishLocation: 'pipeline'
+              - task: DownloadBuildArtifacts@1
+                inputs:
+                  buildType: 'specific'
+                  downloadType: 'single'
+                  artifactName: 'drop'
+#               itemPattern: '**/*.war'
+                  buildVersionToDownload: 'latest'
+                  specificBuildWithTriggering: true
+                  downloadPath: '$(System.ArtifactsDirectory)'
 
 
 
