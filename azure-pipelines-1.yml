@@ -31,8 +31,8 @@ stages:
               - task: CopyFilesOverSSH@0
                 inputs:
                  sshEndpoint: 'ssh-cd-dev'
-                 sourceFolder: '$(Pipeline.Workspace)/drop/webapp/'
+                 sourceFolder: '$(Pipeline.Workspace)'
                  contents: '**/*.war'
-                 targetFolder: '/opt/tomcat/webapps'
+                 #targetFolder: 
                  readyTimeout: '20000'
             
