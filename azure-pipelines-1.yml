@@ -32,7 +32,9 @@ stages:
                buildType: 'specific'
                downloadType: 'single'
                artifactName: 'drop'
-               itemPattern: '**/*.war'
+#               itemPattern: '**/*.war'
+               buildVersionToDownload: 'latest'
+               specificBuildWithTriggering: true
                downloadPath: '$(System.ArtifactsDirectory)'
             - task: CopyFilesOverSSH@0
               inputs:
