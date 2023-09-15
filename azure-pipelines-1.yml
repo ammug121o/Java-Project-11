@@ -25,4 +25,12 @@ stages:
                targetPath: '$(Pipeline.Workspace)'
                artifact: 'drop'
                publishLocation: 'pipeline'
+           
+            - task: DownloadBuildArtifacts@1
+              inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               artifactName: 'drop'
+               itemPattern: '**/*.war'
+               downloadPath: '$(System.ArtifactsDirectory)'
             
